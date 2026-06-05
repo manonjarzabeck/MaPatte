@@ -13,47 +13,54 @@ struct CalendarScene: View {
   
   var body: some View {
     NavigationStack {
-      List {
-        ForEach(groupedItems, id: \.date) { group in
-          Section {
-            ForEach(group.list) { item in
-              CalendarCell(item: item)
+      ScrollViewReader { proxy in
+        List {
+          ForEach(groupedItems, id: \.date) { group in
+            Section {
+              ForEach(group.list) { item in
+                CalendarCell(item: item)
+                  .id(item.id)
+              }
+            } header: {
+              Text(group.date.formatted(date: .complete,
+                                        time: .omitted))
+              .listRowInsets(.bottom, 0)
+              .foregroundStyle(group.date.isToday
+                               ? Color.accent
+                               : .primary)
             }
-          } header: {
-            Text(group.date.formatted(date: .complete,
-                                      time: .omitted))
-            .listRowInsets(.bottom, 0)
-            .foregroundStyle(group.date.isToday
-                             ? Color.accent
-                             : .primary)
-          }
-          .headerProminence(.increased)
-        }
-      }
-      .listStyle(.inset)
-      .navigationTitle("Calendrier")
-      .toolbar {
-        ToolbarItem(placement: .bottomBar) {
-          Button("Filtrer",
-                 systemImage: Icon.filter.systemName) {
-            
+            .headerProminence(.increased)
           }
         }
-        
-        ToolbarSpacer(.flexible, placement: .bottomBar)
-        
-        ToolbarItem(placement: .bottomBar) {
-          Button("Aujourd'hui") {
-            
+        .listStyle(.inset)
+        .navigationTitle("Calendrier")
+        .toolbar {
+          ToolbarItem(placement: .bottomBar) {
+            Button("Filtrer",
+                   systemImage: Icon.filter.systemName) {
+              
+            }
           }
-        }
-        
-        ToolbarSpacer(.flexible, placement: .bottomBar)
-        
-        ToolbarItem(placement: .bottomBar) {
-          Button("Ajouter",
-                 systemImage: Icon.add.systemName) {
-            
+          
+          ToolbarSpacer(.flexible, placement: .bottomBar)
+          
+          ToolbarItem(placement: .bottomBar) {
+            Button("Aujourd'hui") {
+              if let todayCellID {
+                withAnimation(.snappy) {
+                  proxy.scrollTo(todayCellID)
+                }
+              }
+            }
+          }
+          
+          ToolbarSpacer(.flexible, placement: .bottomBar)
+          
+          ToolbarItem(placement: .bottomBar) {
+            Button("Ajouter",
+                   systemImage: Icon.add.systemName) {
+              
+            }
           }
         }
       }
@@ -99,6 +106,12 @@ struct CalendarScene: View {
     return tupleList.sorted { first, second in
       first.0 < second.0
     }
+  }
+  
+  private var todayCellID: UUID? {
+    groupedItems
+      .filter { $0.date.isToday }
+      .first?.list.first?.id
   }
 }
 

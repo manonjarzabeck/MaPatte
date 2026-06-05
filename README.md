@@ -63,6 +63,7 @@ fix: correct minor typos in code
 docs: correct spelling of CHANGELOG
 ```
 
-## Bogues : Mathieu
+## à faire : Mathieu
 
 - [] vérifier que tous les éléments s'affichent dans le calendrier
+- [] ajouter des items dans Calendar
