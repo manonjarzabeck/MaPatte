@@ -27,4 +27,20 @@ extension Date {
       second: second
     ).date ?? .now
   }
+  
+  // https://stackoverflow.com/a/25232091
+  var ageString: String {
+    let calendar = Calendar.current
+    
+    let age = calendar.dateComponents([.year], from: self, to: .now).year ?? 0
+    let label = age > 1 ? "ans" :  "an"
+    
+    return "\(age) \(label)"
+  }
+  
+  var isToday: Bool {
+    let calendar = Calendar.current
+    
+    return calendar.isDateInToday(self)
+  }
 }

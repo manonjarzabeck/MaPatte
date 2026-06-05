@@ -12,20 +12,26 @@ struct CalendarCell: View {
   let item: CalendarItem
   
   var body: some View {
-    HStack(alignment: .center,
+    HStack(alignment: .top,
            spacing: .zero) {
       Capsule()
-        .foregroundStyle(item.color)
+        .foregroundStyle(item.animal.color.primary)
         .frame(width: Styles.indicatorWidth)
         .padding(.trailing, Styles.indicatorTextSpacing)
       
       VStack(alignment: .leading,
              spacing: Styles.titleAnimalNameSpacing) {
-        Text(item.title)
-          .font(Styles.titleFont)
-          .foregroundStyle(Styles.titleColor)
+        Group {
+          if case .birthday = item.kind {
+            Text("\(Image(systemName: "birthday.cake")) \(item.title)")
+          } else {
+            Text(item.title)
+          }
+        }
+        .font(Styles.titleFont)
+        .foregroundStyle(Styles.titleColor)
         
-        Text(item.animalName)
+        Text(item.animal.name)
           .font(Styles.animalFont)
           .foregroundStyle(Styles.animalColor)
       }
@@ -70,7 +76,7 @@ fileprivate enum Styles {
 
 #Preview {
   List {
-    ForEach(CalendarItem.examples) { item in
+    ForEach(CalendarItem.previewExamples) { item in
       CalendarCell(item: item)
     }
   }

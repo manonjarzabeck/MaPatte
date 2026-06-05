@@ -62,3 +62,7 @@ fix: correct minor typos in code
 ```
 docs: correct spelling of CHANGELOG
 ```
+
+## Bogues : Mathieu
+
+- [] vérifier que tous les éléments s'affichent dans le calendrier
