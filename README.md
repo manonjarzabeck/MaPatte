@@ -14,7 +14,7 @@
 │   │   └── ModelB.swift
 │   └── Scene
 │       └── CalendarScene.swift // Un écran
-│   MedicalSheet
+├── MedicalSheet
 │   ├── Component
 │   │   └── ...
 │   ├── Model
