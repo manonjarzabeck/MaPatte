@@ -95,11 +95,12 @@
 				};
 			};
 			buildConfigurationList = EF5F79372FD0668E00E8C298 /* Build configuration list for PBXProject "MaPatte" */;
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = EF5F79332FD0668E00E8C298;
 			minimizedProjectReferenceProxies = 1;

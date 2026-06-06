@@ -65,5 +65,5 @@ docs: correct spelling of CHANGELOG
 
 ## à faire : Mathieu
 
-- [] vérifier que tous les éléments s'affichent dans le calendrier
-- [] ajouter des items dans Calendar
+- [ ] vérifier que tous les éléments s'affichent dans le calendrier
+- [ ] ajouter des items supplémentaires dans Calendar 
