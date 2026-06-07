@@ -22,8 +22,7 @@ struct CalendarScene: View {
                   .id(item.id)
               }
             } header: {
-              Text(group.date.formatted(date: .complete,
-                                        time: .omitted))
+              Text(sectionHeaderText(date: group.date))
               .listRowInsets(.bottom, 0)
               .foregroundStyle(group.date.isToday
                                ? Color.accent
@@ -112,6 +111,10 @@ struct CalendarScene: View {
     groupedItems
       .filter { $0.date.isToday }
       .first?.list.first?.id
+  }
+  
+  private func sectionHeaderText(date: Date) -> String {
+    "\(date.formatted(.dateTime.weekday(.wide)).localizedCapitalized) - \(date.formatted(date: .long, time: .omitted))"
   }
 }
 
