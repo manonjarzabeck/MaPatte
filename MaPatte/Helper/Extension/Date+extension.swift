@@ -43,4 +43,15 @@ extension Date {
         
         return calendar.isDateInToday(self)
     }
+    
+    var birthdayOfCurrentYear: Date {
+        let calendar = Calendar.current
+        
+        let currentYear = calendar.dateComponents([.year], from: .now).year ?? 1900
+        
+        var component = calendar.dateComponents([.year, .month, .day], from: self)
+        component.year = currentYear
+
+        return calendar.date(from: component) ?? .distantFuture
+    }
 }

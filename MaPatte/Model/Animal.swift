@@ -53,7 +53,7 @@ extension Animal {
     static let athena: Animal = .init(name: "Athéna",
                                       gender: .female,
                                       birthday: .from(year: 2021,
-                                                      month: 4,
+                                                      month: 5,
                                                       day: 1),
                                       species: .cat,
                                       breed: "Sphynx",
