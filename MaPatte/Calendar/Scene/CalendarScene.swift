@@ -62,6 +62,13 @@ struct CalendarScene: View {
                         }
                     }
                 }
+                .onAppear {
+                    if let todayCellID {
+                        withAnimation(.snappy(duration: 0.1)) {
+                            proxy.scrollTo(todayCellID)
+                        }
+                    }
+                }
             }
         }
     }

@@ -67,6 +67,19 @@ extension CalendarItem {
             animal: .hermes
         ),
         .init(
+            title: "Bilan annuel chez le vétérinaire",
+            kind: .event(.from(year: 2026, month: 06, day: 11)),
+            animal: .hermes
+        ),
+        .init(
+            title: "Toilettage et coupe des griffes",
+            kind: .appointment(start: .from(year: 2026, month: 07, day: 11,
+                                            hour: 14, minute: 15),
+                               end: .from(year: 2026, month: 07, day: 11,
+                                          hour: 15, minute: 00)),
+            animal: .hermes
+        ),
+        .init(
             title: "Anniversaire d'Athéna",
             kind: .birthday,
             animal: .athena
@@ -85,6 +98,24 @@ extension CalendarItem {
             animal: .athena
         ),
         .init(
+            title: "Contrôle post-stérilisation",
+            kind: .event(.from(year: 2026, month: 6, day: 1)),
+            animal: .athena
+        ),
+        .init(
+            title: "Détartrage dentaire",
+            kind: .appointment(start: .from(year: 2026, month: 8, day: 3,
+                                            hour: 10, minute: 00),
+                               end: .from(year: 2026, month: 8, day: 3,
+                                          hour: 10, minute: 30)),
+            animal: .athena
+        ),
+        .init(
+            title: "Bilan sanguin annuel",
+            kind: .event(.from(year: 2026, month: 3, day: 10)),
+            animal: .athena
+        ),
+        .init(
             title: "Visite trimestrielle",
             kind: .appointment(start: .from(year: 2026, month: 6, day: 15,
                                             hour: 10, minute: 30),
@@ -100,5 +131,30 @@ extension CalendarItem {
                                           hour: 19, minute: 00)),
             animal: .hades
         ),
+        .init(
+            title: "Taille des griffes et des dents",
+            kind: .appointment(start: .from(year: 2026, month: 7, day: 21,
+                                            hour: 9, minute: 30),
+                               end: .from(year: 2026, month: 7, day: 21,
+                                          hour: 10, minute: 00)),
+            animal: .hades),
+        .init(
+            title: "Suivi du poids et de l'alimentation",
+            kind: .appointment(start: .from(year: 2026, month: 7, day: 21,
+                                            hour: 15, minute: 00),
+                               end: .from(year: 2026, month: 7, day: 21,
+                                          hour: 15, minute: 30)),
+            animal: .hades
+        ),
+        .init(
+            title: "Anniversaire de Hadès",
+            kind: .birthday,
+            animal: .hades
+        ),
+        .init(
+            title: "Vaccination myxomatose",
+            kind: .event(.from(year: 2026, month: 4, day: 28)),
+            animal: .hades
+        )
     ]
 }
