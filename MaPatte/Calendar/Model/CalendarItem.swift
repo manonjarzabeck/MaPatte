@@ -80,6 +80,11 @@ extension CalendarItem {
             animal: .hermes
         ),
         .init(
+            title: "Anniversaire de Hermès",
+            kind: .birthday,
+            animal: .hermes
+        ),
+        .init(
             title: "Anniversaire d'Athéna",
             kind: .birthday,
             animal: .athena

@@ -9,7 +9,28 @@
 import SwiftUI
 
 struct CalendarScene: View {
-    let items: [CalendarItem] = CalendarItem.examples
+    private let items: [CalendarItem]
+    
+    @State private var visibleAnimals: [VisibleAnimal] = []
+    
+    init() {
+        self.items = CalendarItem.examples
+        self.visibleAnimals = []
+        
+        let animalNames = self.items.map(\.animal.name)
+        
+        let nameSet = Set(animalNames)
+        
+        let vAnimals = nameSet
+            .map {
+                VisibleAnimal(name: $0,
+                              isOn: true)
+            }.sorted {
+                $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+            }
+
+        self._visibleAnimals = State(initialValue: vAnimals)
+    }
     
     var body: some View {
         NavigationStack {
@@ -35,9 +56,11 @@ struct CalendarScene: View {
                 .navigationTitle("Calendrier")
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        Button("Filtrer",
-                               systemImage: Icon.filter.systemName) {
-                            
+                        Menu {
+                            animalFilterView
+                        } label: {
+                            Icon.filter.image
+                                .contentShape(.rect)
                         }
                     }
                     
@@ -73,15 +96,25 @@ struct CalendarScene: View {
         }
     }
     
+    private var todayCellID: UUID? {
+        groupedItems
+            .filter { $0.date.isToday }
+            .first?.list.first?.id
+    }
+    
     private var groupedItems: [(date: Date, list: [CalendarItem])] {
-        let dict = Dictionary(grouping: items) { item in
+        let filteredItems = items.filter { item in
+            visibleAnimals.filter(\.isOn).contains(where: { $0.name == item.animal.name })
+        }
+        
+        let dict = Dictionary(grouping: filteredItems) { item in
             var date = Date.now
             
             switch item.kind {
             case .appointment(start: let startDate, end: _):
                 date = startDate
             case .birthday:
-                date = item.animal.birthday
+                date = item.animal.birthday.birthdayOfCurrentYear
             case .event(let startDate):
                 date = startDate
             }
@@ -100,7 +133,7 @@ struct CalendarScene: View {
                 case .appointment(start: let startDate, end: _):
                     newKey = startDate
                 case .birthday:
-                    newKey = first.animal.birthday
+                    newKey = first.animal.birthday.birthdayOfCurrentYear
                 case .event(let startDate):
                     newKey = startDate
                 }
@@ -114,14 +147,28 @@ struct CalendarScene: View {
         }
     }
     
-    private var todayCellID: UUID? {
-        groupedItems
-            .filter { $0.date.isToday }
-            .first?.list.first?.id
-    }
-    
     private func sectionHeaderText(date: Date) -> String {
         "\(date.formatted(.dateTime.weekday(.wide)).localizedCapitalized) - \(date.formatted(date: .long, time: .omitted))"
+    }
+    
+    private struct VisibleAnimal: Identifiable, Equatable {
+        let name: String
+        var isOn: Bool
+        
+        var id: String {
+            name
+        }
+    }
+
+    private var animalFilterView: some View {
+        Section {
+            ForEach(visibleAnimals) { animal in
+                if let firstIndex = visibleAnimals.firstIndex(where: { animal.name == $0.name }) {
+                    Toggle(animal.name,
+                           isOn: $visibleAnimals[firstIndex].isOn)
+                }
+            }
+        }
     }
 }
 
