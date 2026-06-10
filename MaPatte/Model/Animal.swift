@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-struct Animal {
+struct Animal: Identifiable {
+    let id = UUID()
     let name: String
     let gender: Gender
     let birthday: Date
@@ -32,6 +33,17 @@ struct Animal {
                 "Lapin"
             }
         }
+        
+        var image: Image {
+            switch self {
+            case .cat:
+                Image(systemName: "cat.fill")
+            case .dog:
+                Image(systemName: "dog.fill")
+            case .rabbit:
+                Image(systemName: "hare.fill")
+            }
+        }
     }
     
     enum Gender {
@@ -50,6 +62,12 @@ struct Animal {
 }
 
 extension Animal {
+    
+    static let all: [Animal] = [
+        .hermes,
+        .athena,
+        .hades
+    ]
     
     static let athena: Animal = .init(name: "Athéna",
                                       gender: .female,
