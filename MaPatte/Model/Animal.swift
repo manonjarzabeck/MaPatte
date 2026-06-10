@@ -15,6 +15,7 @@ struct Animal {
     let species: Species
     let breed: String
     let color: AnimalColor
+    let picture: Image
     
     enum Species {
         case cat
@@ -57,7 +58,8 @@ extension Animal {
                                                       day: 1),
                                       species: .cat,
                                       breed: "Sphynx",
-                                      color: .pink)
+                                      color: .pink,
+                                      picture: Image(.animalAthena))
     
     static let hades: Animal = .init(name: "Hadès",
                                      gender: .male,
@@ -66,7 +68,8 @@ extension Animal {
                                                      day: 25),
                                      species: .rabbit,
                                      breed: "Lionhead",
-                                     color: .blue)
+                                     color: .blue,
+                                     picture: Image(.animalHades))
     
     static let hermes: Animal = .init(name: "Hermès",
                                       gender: .male,
@@ -75,5 +78,6 @@ extension Animal {
                                                       day: 23),
                                       species: .dog,
                                       breed: "Shiba",
-                                      color: .teal)
+                                      color: .teal,
+                                      picture: Image(.animalHermes))
 }
