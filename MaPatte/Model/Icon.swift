@@ -11,6 +11,7 @@ import SwiftUI
 enum Icon {
     case add
     case filter
+    case settings
     
     var systemName: String {
         switch self {
@@ -18,6 +19,8 @@ enum Icon {
             "plus"
         case .filter:
             "line.3.horizontal.decrease"
+        case .settings:
+            "gear"
         }
     }
     
