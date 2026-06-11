@@ -8,34 +8,29 @@
 import SwiftUI
 
 struct Ficheheader: View {
-    
-    let animalAvatar: ImageResource
-    let animalColorCard: Color
-    let animalColorName: Color
-    let animalName: String
-    let animalAge: Int
+    let animal: Animal
     
     var body: some View {
         VStack{
-            Image(animalAvatar)
+            animal.picture
                 .resizable()
                 .scaledToFill()
                 .frame(width: 168, height: 168)
-                .clipShape(RoundedRectangle(cornerRadius: 20 , style: .continuous))
-                .padding(8)
+                .clipShape(RoundedRectangle(cornerRadius: 34 , style: .continuous))
+                .padding(9)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .stroke(animalColorCard, lineWidth: 4)
+                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+                        .stroke(animal.color.off, lineWidth: 6)
                     
                 }
             
-            Text(animalName)
+            Text(animal.name)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 24))
                 .fontWeight(.bold)
-                .foregroundStyle(animalColorName)
+                .foregroundStyle(animal.color.primary)
             
-            Text("\(animalAge) ans")
+            Text(animal.birthday.ageString)
                 .font(.system(size: 20))
                 .fontWeight(.semibold)
             
@@ -44,8 +39,5 @@ struct Ficheheader: View {
 }
 
 #Preview {
-    Ficheheader(animalAvatar: .animalAthena,
-                animalColorCard: AnimalColor.pink.off,
-                animalColorName: AnimalColor.pink.primary,
-                animalName: "Athéna", animalAge: 5)
+    Ficheheader(animal: .athena)
 }

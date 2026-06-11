@@ -9,7 +9,23 @@ import SwiftUI
 
 struct MedicalSheetScene: View {
     var body: some View {
-        Text("MedicalSheetScene")
+        
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: .zero) {
+                    Header(animal: .athena)
+                        .padding(.horizontal)
+                    
+                    VStack(spacing: 32) {
+                        Ficheheader(animal: .athena)
+                        AnimalInfo()
+                            .padding(.horizontal)
+                    }
+                    
+                }
+            }
+            .scrollBounceBehavior(.basedOnSize)
+        }
     }
 }
 

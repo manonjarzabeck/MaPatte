@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Header: View {
-    let animalAvatar : ImageResource
-    let animalColorCard : Color
+    let animal: Animal
+
     
     var body: some View {
         HStack{
@@ -20,7 +20,7 @@ struct Header: View {
             
             Spacer()
             
-            Image(animalAvatar)
+            animal.picture
                 .resizable()
                 .scaledToFill()
                 .frame(width: 60, height: 60)
@@ -28,14 +28,12 @@ struct Header: View {
                 .padding(4)
                 .overlay{
                     Circle()
-                    .stroke(animalColorCard, lineWidth: 4)
+                        .stroke(animal.color.off, lineWidth: 4)
             }
         }
-        .frame(width: 361, height: 88)
     }
 }
 
 #Preview {
-    Header(animalAvatar: .animalAthena,
-           animalColorCard: AnimalColor.pink.off)
+    Header(animal: .athena)
 }
