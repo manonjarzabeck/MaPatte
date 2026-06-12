@@ -9,26 +9,24 @@ import SwiftUI
 
 struct AppTabBar: View {
     var body: some View {
-        
         TabView {
+            Tab("Fiche", systemImage: "info.circle") {
+                MedicalSheetScene()
+            }
             
-            MedicalSheetScene()
-                .tabItem{
-                    Label("Fiche", systemImage: "info.circle")
+            Tab("Calendrier", systemImage: "calendar") {
+                NavigationStack {
+                    CalendarScene()
                 }
+            }
             
-            CalendarScene()
-                .tabItem{
-                    Label("Calendrier", systemImage: "calendar")
-                }
-            DocumentsScene()
-                .tabItem{
-                    Label("Documents", systemImage: "doc")
-                }
-            VeterinarianRecordsScene()
-                .tabItem{
-                    Label("Vétérinaire", systemImage: "stethoscope")
-                }
+            Tab("Documents", systemImage: "doc") {
+                DocumentsScene()
+            }
+            
+            Tab("Vétérinaires", systemImage: "stethoscope") {
+                VeterinarianRecordsScene()
+            }
         }
     }
 }
