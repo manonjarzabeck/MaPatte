@@ -8,26 +8,37 @@
 import SwiftUI
 
 struct AnimalInfoSheet: View {
-    private let athena = Animal.athena
+    let animal: Animal
     
     var body: some View {
         
         VStack(spacing: 32) {
             VStack(spacing: 12) {
                 AnimalInfoSectionTitle(sectionTitle: "Identité")
-                AnimalInfoRow(property: "Genre", value: athena.gender.name)
+                
+                AnimalInfoRow(property: "Genre",
+                              value: animal.gender.name)
+                
                 Divider()
-                AnimalInfoRow(property: "Espèce", value: athena.species.name)
+                
+                AnimalInfoRow(property: "Espèce",
+                              value: animal.species.name)
                 Divider()
             }
         
             VStack(spacing: 12) {
                 AnimalInfoSectionTitle(sectionTitle: "État Vaccinal")
+                
                 AnimalInfoRow(property: "Rage", value: "Oui")
+                
                 Divider()
+                
                 AnimalInfoRow(property: "CHPPi", value: "Oui")
+                
                 Divider()
+                
                 AnimalInfoRow(property: "Leshmaniose", value: "Non")
+                
                 Divider()
             }
         }
@@ -35,5 +46,5 @@ struct AnimalInfoSheet: View {
 }
 
 #Preview {
-    AnimalInfoSheet()
+    AnimalInfoSheet(animal: .athena)
 }

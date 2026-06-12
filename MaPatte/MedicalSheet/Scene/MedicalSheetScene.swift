@@ -8,43 +8,44 @@
 import SwiftUI
 
 struct MedicalSheetScene: View {
+    @State private var animal: Animal = .athena
+    @State private var isAnimalPickerPresented: Bool = false
+    
     var body: some View {
-        
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: .zero) {
-                    Header(animal: .athena)
+        PageWithBottomToolbar {
+            NavigationStack {
+                ScrollView {
+                    VStack(spacing: .zero) {
+                        MedicalSheetHeader(animal: animal) {
+                            isAnimalPickerPresented = true
+                        }
                         .padding(.horizontal)
-                    
-                    VStack(spacing: 32) {
-                        Ficheheader(animal: .athena)
-                        AnimalInfo()
-                            .padding(.horizontal)
+                        
+                        VStack(spacing: 32) {
+                            MedicalSheetTopView(animal: animal)
+                            
+                            AnimalInfo(animal: animal)
+                                .padding(.horizontal)
+                        }
+                        
                     }
-                    
+                }
+                .scrollBounceBehavior(.basedOnSize)
+                .fullScreenCover(isPresented: $isAnimalPickerPresented) {
+                    AnimalPickerScene { newAnimal in
+                        animal = newAnimal
+                    }
                 }
             }
-            .scrollBounceBehavior(.basedOnSize)
-        }
-        .toolbar{
-            ToolbarItem(placement: .bottomBar) {
+        } toolbar: {
+            HStack(spacing: .zero) {
+                GlassIconButton(systemName: Icon.share.systemName,
+                                action: {})
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                }
-            }
-            
-            ToolbarSpacer(.flexible, placement: .bottomBar)
-            
-            ToolbarItem(placement: .bottomBar) {
+                Spacer(minLength: 12)
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "square.and.pencil")
-                }
+                GlassIconButton(systemName: Icon.edit.systemName,
+                                action: {})
             }
         }
     }

@@ -9,7 +9,29 @@ import SwiftUI
 
 struct AppTabBar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            Tab("Fiche",
+                systemImage: Icon.medicalSheetTab.systemName) {
+                MedicalSheetScene()
+            }
+            
+            Tab("Calendrier",
+                systemImage: Icon.calendarTab.systemName) {
+                NavigationStack {
+                    CalendarScene()
+                }
+            }
+            
+            Tab("Documents",
+                systemImage: Icon.documentsTab.systemName) {
+                DocumentsScene()
+            }
+            
+            Tab("Vétérinaires",
+                systemImage: Icon.veterinarianRecordsTab.systemName) {
+                VeterinarianRecordsScene()
+            }
+        }
     }
 }
 

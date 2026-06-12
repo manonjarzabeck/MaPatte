@@ -13,6 +13,13 @@ enum Icon {
     case filter
     case settings
     case sort
+    case share
+    case edit
+    case calendarEmpty
+    case calendarTab
+    case documentsTab
+    case medicalSheetTab
+    case veterinarianRecordsTab
     
     var systemName: String {
         switch self {
@@ -24,6 +31,20 @@ enum Icon {
             "gear"
         case .sort:
             "arrow.up.arrow.down"
+        case .share:
+            "square.and.arrow.up"
+        case .edit:
+            "square.and.pencil"
+        case .calendarEmpty:
+            "ellipsis.calendar"
+        case .calendarTab:
+            "calendar"
+        case .documentsTab:
+            "doc"
+        case .medicalSheetTab:
+            "info.circle"
+        case .veterinarianRecordsTab:
+            "stethoscope"
         }
     }
     

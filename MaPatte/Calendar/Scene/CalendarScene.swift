@@ -28,69 +28,74 @@ struct CalendarScene: View {
             }.sorted {
                 $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
             }
-
+        
         self._visibleAnimals = State(initialValue: vAnimals)
     }
     
     var body: some View {
-        NavigationStack {
-            ScrollViewReader { proxy in
-                List {
-                    ForEach(groupedItems, id: \.date) { group in
-                        Section {
-                            ForEach(group.list) { item in
-                                CalendarCell(item: item)
-                                    .id(item.id)
-                            }
-                        } header: {
-                            Text(sectionHeaderText(date: group.date))
-                                .listRowInsets(.bottom, 0)
-                                .foregroundStyle(group.date.isToday
-                                                 ? Color.accent
-                                                 : .primary)
-                        }
-                        .headerProminence(.increased)
-                    }
-                }
-                .listStyle(.inset)
-                .navigationTitle("Calendrier")
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        Menu {
-                            animalFilterView
-                        } label: {
-                            Icon.filter.image
-                                .contentShape(.rect)
-                        }
-                    }
-                    
-                    ToolbarSpacer(.flexible, placement: .bottomBar)
-                    
-                    ToolbarItem(placement: .bottomBar) {
-                        Button("Aujourd'hui") {
-                            if let todayCellID {
-                                withAnimation(.snappy) {
-                                    proxy.scrollTo(todayCellID)
+        ScrollViewReader { proxy in
+            PageWithBottomToolbar {
+                NavigationStack {
+                    List {
+                        ForEach(groupedItems, id: \.date) { group in
+                            Section {
+                                ForEach(group.list) { item in
+                                    CalendarCell(item: item)
+                                        .id(item.id)
                                 }
+                            } header: {
+                                Text(sectionHeaderText(date: group.date))
+                                    .listRowInsets(.bottom, 0)
+                                    .foregroundStyle(group.date.isToday
+                                                     ? Color.accent
+                                                     : .primary)
+                            }
+                            .headerProminence(.increased)
+                        }
+                    }
+                    .listStyle(.inset)
+                    .scrollBounceBehavior(.basedOnSize)
+                    .animation(.snappy, value: visibleAnimals)
+                    .overlay {
+                        if groupedItems.isEmpty {
+                            ContentUnavailableView("Aucun évènement",
+                                                   systemImage: Icon.calendarEmpty.systemName)
+                        }
+                    }
+                    .navigationTitle("Calendrier")
+                    .onAppear {
+                        if let todayCellID {
+                            withAnimation(.snappy(duration: 0.1)) {
+                                proxy.scrollTo(todayCellID)
                             }
                         }
                     }
-                    
-                    ToolbarSpacer(.flexible, placement: .bottomBar)
-                    
-                    ToolbarItem(placement: .bottomBar) {
-                        Button("Ajouter",
-                               systemImage: Icon.add.systemName) {
-                            
-                        }
-                    }
                 }
-                .onAppear {
-                    if let todayCellID {
-                        withAnimation(.snappy(duration: 0.1)) {
-                            proxy.scrollTo(todayCellID)
+            } toolbar: {
+                HStack(spacing: .zero) {
+                    Menu {
+                        animalFilterView
+                    } label: {
+                        GlassIconButton(systemName: Icon.filter.systemName,
+                                        action: {})
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Spacer(minLength: 12)
+                    
+                    GlassLabelButton(label: "Aujourd'hui") {
+                        if let todayCellID {
+                            withAnimation(.snappy) {
+                                proxy.scrollTo(todayCellID)
+                            }
                         }
                     }
+                    .disabled(todayCellID == nil)
+                    
+                    Spacer(minLength: 12)
+                    
+                    GlassIconButton(systemName: Icon.add.systemName,
+                                    action: {}) 
                 }
             }
         }
@@ -159,7 +164,7 @@ struct CalendarScene: View {
             name
         }
     }
-
+    
     private var animalFilterView: some View {
         Section {
             ForEach(visibleAnimals) { animal in

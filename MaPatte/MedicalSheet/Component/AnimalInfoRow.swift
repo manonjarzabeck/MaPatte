@@ -14,7 +14,6 @@ struct AnimalInfoRow: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: .zero) {
-            
             Text(property)
                 .font(.subheadline)
                 .fontWeight(.regular)

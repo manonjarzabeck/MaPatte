@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnimalInfo: View {
+    let animal: Animal
     
     @State private var viewSelected = 0
     
@@ -22,7 +23,7 @@ struct AnimalInfo: View {
             
             Group {
                 if viewSelected == 0 {
-                    AnimalInfoSheet()
+                    AnimalInfoSheet(animal: animal)
                         .transition(.blurReplace)
                 } else {
                     AnimalInfoTreatment()
@@ -35,5 +36,5 @@ struct AnimalInfo: View {
 }
 
 #Preview {
-    AnimalInfo()
+    AnimalInfo(animal: .athena)
 }
