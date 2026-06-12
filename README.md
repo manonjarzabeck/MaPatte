@@ -60,6 +60,12 @@ fix: correct minor typos in code
 ### Nommer un commit de mise à jour de la doc ou du README
 
 ```
+refactor: update files spacing
+```
+
+### Nommer un commit de mise à jour de la doc ou du README
+
+```
 docs: correct spelling of CHANGELOG
 ```
 
