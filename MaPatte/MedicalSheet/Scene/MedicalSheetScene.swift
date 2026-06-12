@@ -26,6 +26,27 @@ struct MedicalSheetScene: View {
             }
             .scrollBounceBehavior(.basedOnSize)
         }
+        .toolbar{
+            ToolbarItem(placement: .bottomBar) {
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+            
+            ToolbarSpacer(.flexible, placement: .bottomBar)
+            
+            ToolbarItem(placement: .bottomBar) {
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+        }
     }
 }
 
