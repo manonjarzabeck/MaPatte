@@ -68,9 +68,3 @@ refactor: update files spacing
 ```
 docs: correct spelling of CHANGELOG
 ```
-
-## à faire : Mathieu
-
-- [ ] vérifier que tous les éléments s'affichent dans le calendrier
-- [x] ajouter des items supplémentaires dans Calendar 
-- [x] ajouter l'icône de l'app
