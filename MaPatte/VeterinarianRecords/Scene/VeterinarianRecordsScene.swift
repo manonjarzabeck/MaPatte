@@ -13,24 +13,20 @@ struct VeterinarianRecordsScene: View {
     var body: some View {
         
         NavigationStack {
-            
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Spacer()
-                        .frame(height:4)
-                    
                     ForEach(Veterinarian.cliniques) { veterinarian in
-                        VeterinarianCard(veterinarian: veterinarian)}
+                        VeterinarianCard(veterinarian: veterinarian)
+                    }
                 }
             }
-            
+            .contentMargins(.horizontal, 17, for: .scrollContent)
             .navigationTitle("Vétérinaires")
-            
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                     } label: {
-                        Image(systemName: "line.3.horizontal.decrease")
+                        Icon.filter.image
                     }
                 }
                 
@@ -41,11 +37,8 @@ struct VeterinarianRecordsScene: View {
                         {
                     } label: {
                         Text("Urgence")
-                            .font(.title3)
-                            .foregroundStyle(.white)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.accent)
+                    .buttonStyle(.glassProminent)
                 }
                 
                 ToolbarSpacer(.flexible, placement: .bottomBar)
@@ -53,8 +46,7 @@ struct VeterinarianRecordsScene: View {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                     } label: {
-                        Image(systemName: "plus")
-
+                        Icon.add.image
                     }
                 }
             }

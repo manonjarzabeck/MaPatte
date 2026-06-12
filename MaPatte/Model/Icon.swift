@@ -12,6 +12,7 @@ enum Icon {
     case add
     case filter
     case settings
+    case sort
     
     var systemName: String {
         switch self {
@@ -21,6 +22,8 @@ enum Icon {
             "line.3.horizontal.decrease"
         case .settings:
             "gear"
+        case .sort:
+            "arrow.up.arrow.down"
         }
     }
     

@@ -9,7 +9,31 @@ import SwiftUI
 
 struct DocumentsScene: View {
     var body: some View {
-        Text("DocumentsScene")
+        NavigationStack {
+            DocumentList()
+                .navigationTitle("Documents")
+        }
+        .toolbar{
+            ToolbarItem(placement: .bottomBar) {
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+            }
+            
+            ToolbarSpacer(.flexible, placement: .bottomBar)
+            
+            ToolbarItem(placement: .bottomBar) {
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
     }
 }
 
