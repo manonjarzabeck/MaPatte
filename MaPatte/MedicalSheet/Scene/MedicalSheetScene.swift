@@ -8,23 +8,33 @@
 import SwiftUI
 
 struct MedicalSheetScene: View {
+    @State private var animal: Animal = .athena
+    @State private var isAnimalPickerPresented: Bool = false
+    
     var body: some View {
-        
         NavigationStack {
             ScrollView {
                 VStack(spacing: .zero) {
-                    Header(animal: .athena)
+                    MedicalSheetHeader(animal: animal) {
+                        isAnimalPickerPresented = true
+                    }
                         .padding(.horizontal)
                     
                     VStack(spacing: 32) {
-                        Ficheheader(animal: .athena)
-                        AnimalInfo()
+                        MedicalSheetTopView(animal: animal)
+                        
+                        AnimalInfo(animal: animal)
                             .padding(.horizontal)
                     }
                     
                 }
             }
             .scrollBounceBehavior(.basedOnSize)
+        }
+        .fullScreenCover(isPresented: $isAnimalPickerPresented) {
+            AnimalPickerScene { newAnimal in
+                animal = newAnimal
+            }
         }
         .toolbar{
             ToolbarItem(placement: .bottomBar) {

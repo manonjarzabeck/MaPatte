@@ -1,5 +1,5 @@
 //
-//  Ficheheader.swift
+//  MedicalSheetTopView.swift
 //  MaPatte
 //
 //  Created by apprenant134 on 10/06/2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Ficheheader: View {
+struct MedicalSheetTopView: View {
     let animal: Animal
     
     var body: some View {
@@ -15,29 +15,29 @@ struct Ficheheader: View {
             animal.picture
                 .resizable()
                 .scaledToFill()
-                .frame(width: 168, height: 168)
-                .clipShape(RoundedRectangle(cornerRadius: 34 , style: .continuous))
-                .padding(9)
+                .frame(width: 144, height: 144)
+                .clipShape(.rect(cornerRadius: 28,
+                                 style: .continuous))
+                .padding(12)
                 .overlay{
                     RoundedRectangle(cornerRadius: 40, style: .continuous)
-                        .stroke(animal.color.off, lineWidth: 6)
-                    
+                        .strokeBorder(animal.color.off,
+                                      lineWidth: 6)
                 }
             
             Text(animal.name)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 24))
+                .font(.title)
                 .fontWeight(.bold)
                 .foregroundStyle(animal.color.primary)
             
             Text(animal.birthday.ageString)
-                .font(.system(size: 20))
+                .font(.title3)
                 .fontWeight(.semibold)
-            
         }
     }
 }
 
 #Preview {
-    Ficheheader(animal: .athena)
+    MedicalSheetTopView(animal: .athena)
 }
