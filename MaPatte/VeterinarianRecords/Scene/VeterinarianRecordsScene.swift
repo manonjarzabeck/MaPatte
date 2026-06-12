@@ -11,46 +11,37 @@ struct VeterinarianRecordsScene: View {
     
     @State private var veterinarian = Veterinarian.cliniques
     var body: some View {
-        
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+        PageWithBottomToolbar {
+            NavigationStack {
+                List {
                     ForEach(Veterinarian.cliniques) { veterinarian in
                         VeterinarianCard(veterinarian: veterinarian)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(.vertical, 8)
                     }
                 }
+                .listStyle(.inset)
+                .navigationTitle("Vétérinaires")
             }
-            .contentMargins(.horizontal, 17, for: .scrollContent)
-            .navigationTitle("Vétérinaires")
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                    } label: {
-                        Icon.filter.image
-                    }
-                }
+        } toolbar: {
+            HStack(spacing: .zero) {
+                GlassIconButton(systemName: Icon.filter.systemName,
+                                action: {})
                 
-                ToolbarSpacer(.flexible, placement: .bottomBar)
+                Spacer(minLength: 12)
                 
-                ToolbarItem(placement: .bottomBar) {
-                    Button
-                        {
-                    } label: {
-                        Text("Urgence")
-                    }
-                    .buttonStyle(.glassProminent)
-                }
+                GlassLabelButton(label: "Urgence",
+                                 isProminent: true,
+                                 action: {})
                 
-                ToolbarSpacer(.flexible, placement: .bottomBar)
+                Spacer(minLength: 12)
                 
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                    } label: {
-                        Icon.add.image
-                    }
-                }
+                GlassIconButton(systemName: Icon.add.systemName,
+                                action: {})
             }
         }
+
+        
     }
 }
 #Preview {

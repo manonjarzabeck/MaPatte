@@ -9,29 +9,20 @@ import SwiftUI
 
 struct DocumentsScene: View {
     var body: some View {
-        NavigationStack {
-            DocumentList()
-                .navigationTitle("Documents")
-        }
-        .toolbar{
-            ToolbarItem(placement: .bottomBar) {
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.up.arrow.down")
-                }
+        PageWithBottomToolbar {
+            NavigationStack {
+                DocumentList()
+                    .navigationTitle("Documents")
             }
-            
-            ToolbarSpacer(.flexible, placement: .bottomBar)
-            
-            ToolbarItem(placement: .bottomBar) {
+        } toolbar: {
+            HStack(spacing: .zero) {
+                GlassIconButton(systemName: Icon.sort.systemName,
+                                action: {})
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "plus")
-                }
+                Spacer(minLength: 12)
+                
+                GlassIconButton(systemName: Icon.add.systemName,
+                                action: {})
             }
         }
     }
