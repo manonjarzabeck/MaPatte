@@ -12,19 +12,16 @@ struct VeterinarianCard: View {
     let veterinarian: Veterinarian
     
     var body: some View {
-        
-        VStack(alignment: .leading, spacing: 16) {
-            
-            HStack(alignment: .top) {
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    
+        VStack(alignment: .leading, spacing: 20) {
+            HStack(alignment: .top, spacing: .zero) {
+                VStack(alignment: .leading, spacing: 6) {
                     Text(veterinarian.nom)
-                        .font(.title2.bold())
-                    HStack {
+                        .font(.title3.weight(.bold))
+                    
+                    HStack(spacing: 8) {
                         ForEach(0..<veterinarian.animals.count, id: \.self) { index in
                             Text(veterinarian.animals[index].name)
-                                .font(.subheadline)
+                                .font(.subheadline.weight(.medium))
                                 .foregroundStyle(veterinarian.animals[index].color.primary)
                             
                             if index < veterinarian.animals.count - 1 {
@@ -35,102 +32,133 @@ struct VeterinarianCard: View {
                         }
                     }
                 }
-                    Spacer()
-                    Image (veterinarian.imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-                Spacer()
-                    .frame(height: 4)
                 
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Horaires")
-                            .font(.title3.bold())
-                        
-                        Spacer()
-                        Text(veterinarian.isOpen ? "Ouvert" : "Fermé")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background (
-                                veterinarian.isOpen ? .green.opacity(0.1): .red.opacity(0.1)
-                            )
-                            .foregroundStyle(
-                                veterinarian.isOpen ? .green : .red
-                            )
-                            .clipShape(Capsule())
-                        
-                    }
+                Spacer(minLength: 16)
+                
+                Image (veterinarian.imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 64, height: 64)
+                    .clipShape(.rect(cornerRadius: 16, style: .continuous))
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: .zero) {
+                    Text("Horaires")
+                        .font(.headline.weight(.semibold))
                     
-                    HStack {
-                        Text("Lun. - Ven.")
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(veterinarian.openingHours)
-                            .foregroundStyle(.primary)
-                    }
-                    HStack {
-                        Text("Dimanche")
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text("Fermé")
-                            .foregroundStyle(.primary)
-                    }
-                    Spacer()
-                        .frame(height: 8)
+                    Spacer(minLength: 16)
                     
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Détails")
-                            .font(.title3.bold())
-                        HStack {
-                            Text("Téléphone")
-                                .foregroundStyle(.secondary)
-                            Spacer()
-                            Text(veterinarian.telephone)
-                                .foregroundStyle(.accent)
+                    Text(veterinarian.isOpen ? "Ouvert" : "Fermé")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(
+                            veterinarian.isOpen
+                            ? Color.green
+                            : Color.red
+                        )
+                        .brightness(-0.2)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background {
+                            Capsule()
+                                .fill(veterinarian.isOpen
+                                      ? Color.green.quinary
+                                      : Color.red.quinary)
                         }
-                        HStack {
-                            Text("Courriel")
-                                .foregroundStyle(.secondary)
-                            Spacer()
-                            Text(veterinarian.courriel)
-                                .foregroundStyle(.accent)
-                        }
-                        HStack {
-                            Text("Site Web")
-                                .foregroundStyle(.secondary)
-                            Spacer()
-                            Text(veterinarian.siteweb)
-                                .foregroundStyle(.accent)
-                        }
-                        HStack {
-                            Text("Adresse")
-                                .foregroundStyle(.secondary)
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 2) {
-                                Text(veterinarian.adresse)
-                                Text(veterinarian.ville)
-                                Text(veterinarian.pays)
-                            }
-                            .foregroundStyle(.primary)
-                        }
-                    }
+                }
+                
+                HStack(spacing: .zero) {
+                    Text("Lun. - Ven.")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text(veterinarian.openingHours)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.primary)
+                }
+                
+                HStack(spacing: .zero) {
+                    Text("Dimanche")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text("Fermé")
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.primary)
                 }
             }
-        
-            .padding()
-            .background(.background)
-            .overlay(RoundedRectangle(cornerRadius: 16)
-                .stroke(.gray.opacity(0.2))
-            )
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Détails")
+                    .font(.headline.weight(.semibold))
+                
+                HStack(spacing: .zero) {
+                    Text("Téléphone")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text(veterinarian.telephone)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.accent)
+                }
+                
+                HStack(spacing: .zero) {
+                    Text("Courriel")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text(veterinarian.courriel)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.accent)
+                }
+                
+                HStack(spacing: .zero) {
+                    Text("Site Web")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text(veterinarian.siteweb)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.accent)
+                }
+                
+                HStack(spacing: .zero) {
+                    Text("Adresse")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer(minLength: 16)
+                    
+                    Text("\(veterinarian.adresse)\n\(veterinarian.ville)\n\(veterinarian.pays)")
+                        .font(.subheadline.weight(.medium))
+                        .multilineTextAlignment(.trailing)
+                        .foregroundStyle(.primary)
+                }
+            }
+        }
+        .padding(20)
+        .overlay {
+            RoundedRectangle(cornerRadius: 32,
+                             style: .continuous)
+            .strokeBorder(Color(uiColor: .systemGray5),
+                          lineWidth: 1)
         }
     }
+}
 
 
 #Preview {
     VeterinarianCard(veterinarian: Veterinarian.cliniques[0])
+        .padding()
 }
