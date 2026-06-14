@@ -10,7 +10,7 @@
 │   │   ├── ComponentB.swift
 │   │   └── ComponentC.swift
 │   ├── Model
-│   │   ├── ModelA.swift
+│   │   ├── ModelA.swift // Un modèle
 │   │   └── ModelB.swift
 │   └── Scene
 │       └── CalendarScene.swift // Un écran
