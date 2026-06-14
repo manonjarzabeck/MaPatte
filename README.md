@@ -57,7 +57,7 @@ feat(lang): add polish language
 fix: correct minor typos in code
 ```
 
-### Nommer un commit de mise à jour de la doc ou du README
+### Nommer un commit de réusinage
 
 ```
 refactor: update files spacing
