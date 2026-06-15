@@ -38,6 +38,8 @@ struct AnimalPickerScene: View {
             .searchable(text: $searchText,
                         placement: .automatic,
                         prompt: Text("Rechercher un animal"))
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled(true)
             .navigationTitle("Animal")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
